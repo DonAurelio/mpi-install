@@ -2,8 +2,9 @@
 
 # Install the SSH server
 apt-get install -y openssh-server
-# %1 is the IP address of the master node
-echo "${%1}    slave" >> /etc/hosts
+# %1 is the IP address of the slave node
+# and %2 its number in a set of nodes.
+echo "${%1}    slave_${%2}" >> /etc/hosts
 # Adding an MPI user to run MPI jobs
 adduser --disabled-password --gecos "" mpiuser
 echo "mpiuser:mpiuser" | chpasswd
@@ -13,14 +14,16 @@ service ssh start
 # without user interaction
 apt-get install sshpass
 
-# Login as mpi user 
-su - mpiuser
+# We use su -c "command" mpiuser
+# to run the following commands form 
+# root in behalf of mpiuser 
+
 # Creationg the public and private keys
-ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+su -c "ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa" mpiuser
 # Avoid checking if the remote host is reliable
-echo "StrictHostKeyChecking=no" >> ~/.ssh/config
+su -c "echo 'StrictHostKeyChecking=no' >> ~/.ssh/config" mpiuser
 # Sharing the public key with the remote slave
-sshpass -p 'mpiuser' ssh-copy-id slave #ip-address may also be used
+su -c "sshpass -p 'mpiuser' ssh-copy-id slave_${%2}" mpiuser
 # Sharing the public key with myself
-sshpass -p 'mpiuser' ssh-copy-id localhost #ip-address may also be used
+su -c "sshpass -p 'mpiuser' ssh-copy-id localhost" mpiuser
 
