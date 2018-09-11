@@ -8,4 +8,4 @@ cd
 # files will be visible
 mkdir cloud
 # Mount the remote shared directory
-sudo mount -t nfs master:/home/mpiuser/cloud ~/cloud
+sudo mount -t nfs master:/home/mpiuser/cloud /home/mpiuser/cloud
