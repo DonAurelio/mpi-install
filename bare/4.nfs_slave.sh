@@ -6,6 +6,6 @@ apt-get install -y nfs-common
 cd
 # Creating the directory where the remote shared
 # files will be visible
-mkdir cloud
+mkdir /home/mpiuser/cloud
 # Mount the remote shared directory
 sudo mount -t nfs master:/home/mpiuser/cloud /home/mpiuser/cloud
