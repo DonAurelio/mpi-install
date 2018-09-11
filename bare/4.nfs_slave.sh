@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Install the nfs server package
-apt-get install nfs-common
+apt-get install -y nfs-common
  # Change working dir to te home directory
 cd
 # Creating the directory where the remote shared
