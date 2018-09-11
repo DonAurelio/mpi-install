@@ -4,7 +4,7 @@
 apt-get install -y openssh-server
 # %1 is the IP address of the slave node
 # and %2 its number in a set of nodes.
-echo "${%1}    slave_${%2}" >> /etc/hosts
+echo "$1    slave_$2" >> /etc/hosts
 # Adding an MPI user to run MPI jobs
 adduser --disabled-password --gecos "" mpiuser
 echo "mpiuser:mpiuser" | chpasswd
@@ -23,7 +23,7 @@ su -c "ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa" mpiuser
 # Avoid checking if the remote host is reliable
 su -c "echo 'StrictHostKeyChecking=no' >> ~/.ssh/config" mpiuser
 # Sharing the public key with the remote slave
-su -c "sshpass -p 'mpiuser' ssh-copy-id slave_${%2}" mpiuser
+su -c "sshpass -p 'mpiuser' ssh-copy-id slave_$2" mpiuser
 # Sharing the public key with myself
 su -c "sshpass -p 'mpiuser' ssh-copy-id localhost" mpiuser
 
