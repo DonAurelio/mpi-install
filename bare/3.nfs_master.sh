@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Install the nfs server package
-apt-get install nfs-kernel-server
+apt-get install -y nfs-kernel-server
 # Change working dir to te home directory
 cd 
 # Creating the shared directory
