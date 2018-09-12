@@ -8,5 +8,5 @@ cd
 # files will be visible
 mkdir /home/mpiuser/cloud
 # Mounting the remote directory on behalf of mpi user
-su -c "sudo mount -t nfs master:/home/mpiuser/cloud /home/mpiuser/cloud" mpiuser
+su -c "echo 'mpiuser' | sudo mount -t nfs master:/home/mpiuser/cloud /home/mpiuser/cloud" mpiuser
 
