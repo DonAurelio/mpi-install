@@ -8,4 +8,4 @@ mkdir /home/mpiuser/cloud
 # Mounting the remote directory on behalf of mpi user
 su -c "echo 'mpiuser' | sudo -S mount -t nfs master:/home/mpiuser/cloud /home/mpiuser/cloud" mpiuser
 # To mount the cloud remote folder every time the system starts
-su -c "echo 'mpiuser' | sudo -S echo 'master:/home/mpiuser/cloud /home/mpiuser/cloud nfs' >> /etc/fstab " mpiuser
+echo 'master:/home/mpiuser/cloud /home/mpiuser/cloud nfs' >> /etc/fstab
