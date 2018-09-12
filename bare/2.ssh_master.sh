@@ -8,6 +8,8 @@ echo "$1    slave_$2" >> /etc/hosts
 # Adding an MPI user to run MPI jobs
 adduser --disabled-password --gecos "" mpiuser
 echo "mpiuser:mpiuser" | chpasswd
+# make mpiuser sudoer
+usermod -aG sudo mpiuser
 # Running the ssh service
 service ssh start
 # SSHPASS allor to pass the password to the ssh command
